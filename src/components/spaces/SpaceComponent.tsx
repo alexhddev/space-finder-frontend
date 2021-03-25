@@ -1,5 +1,6 @@
 import { Component } from "react";
 import genericImage from '../../assets/generic-image.jpg';
+import './SpaceComponent.css';
 
 
 interface SpaceComponentProps {
@@ -21,11 +22,11 @@ export class SpaceComponent extends Component<SpaceComponentProps> {
     }
 
     render(){
-        return <div>
+        return <div className='spaceComponent'>
             {this.renderImage()}
-            <label>{this.props.name}</label><br/>
-            <label>{this.props.spaceId}</label><br/>
-            <label>{this.props.location}</label><br/>
+            <label className='name' >{this.props.name}</label><br/>
+            <label className='spaceId'>{this.props.spaceId}</label><br/>
+            <label className='location'>{this.props.location}</label><br/>
             <button onClick={()=>this.props.reserveSpace(this.props.spaceId)}>Reserve</button>
         </div>
     }
