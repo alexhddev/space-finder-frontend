@@ -42,6 +42,7 @@ export class Spaces extends Component<SpacesProps, SpacesState> {
                 />
             )
         }
+        return rows;
     }
 
     render() {
