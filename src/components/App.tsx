@@ -14,6 +14,7 @@ interface AppState{
   user: User | undefined
 }
 
+/* istanbul ignore file */
 export class App extends React.Component<{}, AppState>{
 
   private authService: AuthService = new AuthService();
