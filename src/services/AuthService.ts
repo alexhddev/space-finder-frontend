@@ -35,22 +35,8 @@ export class AuthService {
 
     public async getUserAttributes(user: User):Promise<UserAttribute[]>{
         const result: UserAttribute[] = [];
-        result.push({
-            Name: 'description',
-            Value: 'Best user ever!'
-        });
-        result.push({
-            Name: 'job',
-            Value: 'Engineer'
-        });
-        result.push({
-            Name: 'age',
-            Value: '25'
-        });
-        result.push({
-            Name: 'experience',
-            Value: '3 years'
-        });
+        const attributes = await Auth.userAttributes(user.cognitoUser);
+        result.push(...attributes);
         return result
     }
 }
