@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@aws-amplify/auth": "^4.0.0",
+    "@aws-amplify/auth": "^3.4.20",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.3",
@@ -13,7 +13,8 @@
     "@types/react-dom": "^17.0.2",
     "@types/react-router-dom": "^5.1.7",
     "@types/react-test-renderer": "^17.0.1",
-    "aws-amplify": "^4.0.2",
+    "aws-amplify": "^3.3.17",
+    "aws-sdk": "^2.912.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
