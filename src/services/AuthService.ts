@@ -3,8 +3,6 @@ import { Auth } from 'aws-amplify';
 import Amplify from 'aws-amplify';
 import { config } from './config';
 import { CognitoUser } from '@aws-amplify/auth'
-import * as AWS from 'aws-sdk';
-import { Credentials } from 'aws-sdk/lib/credentials';
 
 Amplify.configure({
     Auth: {
