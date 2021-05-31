@@ -54,8 +54,8 @@ export class DataService {
                 body: JSON.stringify(iCreateSpace)
             }
             const requestResult = await fetch(requestURL, requestOptions);
-            console.log(requestResult);
-            return JSON.stringify(requestResult.body);
+            const responseJson = await requestResult.json();
+            return JSON.stringify(responseJson.id);
         } catch (error) {
             console.error(error);
         }

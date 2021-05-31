@@ -17,7 +17,12 @@ interface ICreateSpaceProps {
 
 export class CreateSpace extends Component<ICreateSpaceProps, ICreateSpaceState> {
 
-    state: ICreateSpaceState = {}
+    state: ICreateSpaceState = {
+        name:'',
+        description:'',
+        location: '',
+        photoURL: ''
+    }
 
     private setName(event: CustomEvent) {
         this.setState({ name: event.target.value });
@@ -40,8 +45,9 @@ export class CreateSpace extends Component<ICreateSpaceProps, ICreateSpaceState>
         const stateClone = {...this.state};
         try {
             const id = await this.props.dataService.createSpace(stateClone);  
-            console.log(id);
+            alert(`created space with id ${id}`);
         } catch (error) {
+            alert(`Error while creating space:  ${error.message}`);
             console.error(error)
         }
 
