@@ -30,11 +30,11 @@ export class App extends React.Component<{}, AppState>{
     this.setUser = this.setUser.bind(this)
   }
 
-  private setUser(user: User){
+  private async setUser(user: User){
     this.setState({
       user: user
     })
-    console.log('setting the user!: ' + user);
+    await this.authService.getAWSTemporaryCreds(user.cognitoUser);
   }
 
 
