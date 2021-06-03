@@ -1,8 +1,13 @@
+import { ICreateSpaceState } from "../components/spaces/CreateSpace";
 import { Space } from "../model/Model";
 
 
 
 export class DataService {
+
+    public async createSpace(iCreateSpace: ICreateSpaceState){
+        return '123'
+    }
 
     public async getSpaces(): Promise<Space[]> {
         const result: Space[] = []
