@@ -46,23 +46,13 @@ export class DataService {
     }
 
     public async getSpaces(): Promise<Space[]> {
-        const result: Space[] = []
-        result.push({
-            location: 'Paris',
-            name: 'Best Location',
-            spaceId: '123'
-        });
-        result.push({
-            location: 'Paris',
-            name: 'Best Location',
-            spaceId: '124'
-        });
-        result.push({
-            location: 'Paris',
-            name: 'Best Location',
-            spaceId: '125'
-        });
-        return result;
+        const requestUrl = appConfig.api.spacesUrl;
+        const requestOptions: RequestInit = {
+            method: 'GET',
+        }
+        const requestResult = await fetch(requestUrl, requestOptions);
+        const responseJson = await requestResult.json();
+        return responseJson;
     }
 
     public async reserveSpace(spaceId: string):Promise<string | undefined> {
