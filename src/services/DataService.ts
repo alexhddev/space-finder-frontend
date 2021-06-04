@@ -20,9 +20,18 @@ export class DataService {
                 iCreateSpace.photo,
                 appConfig.SPACES_PHOTOS_BUCKET
             )
-            console.log(photoUrl)
+            iCreateSpace.photoURL = photoUrl;
+            iCreateSpace.photo = undefined
         }
-        return '123'
+        const requestUrl = appConfig.api.spacesUrl;
+        const requestOptions: RequestInit = {
+            method: 'POST',
+            body: JSON.stringify(iCreateSpace)
+        }
+        const result = await fetch(requestUrl, requestOptions);
+        const resultJSON = await result.json();
+
+        return JSON.stringify(resultJSON.id);
     }
 
     private async uploadPublicFile(file: File, bucket: string){
