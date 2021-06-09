@@ -10,6 +10,7 @@ export const config = {
     SPACES_PHOTOS_BUCKET: 'spaces-photos-02380a0ccf21',
     api: {
         baseUrl: spacesUrl,
-        spacesUrl: `${spacesUrl}spaces`
+        spacesUrl: `${spacesUrl}spaces/`,
+        reservationsUrl: `${spacesUrl}reservations/`
     }
 }
