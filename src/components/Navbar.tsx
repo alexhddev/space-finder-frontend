@@ -22,6 +22,7 @@ export class Navbar extends React.Component<{
                 <Link data-testid='home-link' to='/'> Home</Link>
                 <Link data-testid='profile-link' to='/profile'> Profile</Link>
                 <Link data-testid='spaces-link' to='/spaces'> Spaces</Link>
+                <Link to='/reservations'> Reservations</Link>
                 {loginLogOut}
             </div>
         )
