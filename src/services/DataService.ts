@@ -1,5 +1,5 @@
 import { ICreateSpaceState } from "../components/spaces/CreateSpace";
-import { Space, User } from "../model/Model";
+import { Reservation, Space, User } from "../model/Model";
 import { S3, config } from 'aws-sdk';
 import { config as appConfig} from './config'
 import { generateRandomId } from '../utils/Utils';
@@ -76,7 +76,25 @@ export class DataService {
         } else {
             return []
         }
+    }
 
+    public async getReservations(): Promise<Reservation[]> {
+        if (this.user) {
+            console.log(`Using token: ${this.getUserIdToken()}`)
+            const requestUrl = appConfig.api.reservationsUrl;
+            const requestResult = await fetch(
+                requestUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': this.getUserIdToken()
+                    }
+                }
+            );
+            const responseJSON = await requestResult.json();
+            return responseJSON;
+        } else {
+            return []
+        }
     }
 
     public async reserveSpace(spaceId: string):Promise<string | undefined> {
