@@ -5,7 +5,7 @@ import { DataService } from "../../services/DataService";
 import { ReservationComponent } from "./ReservationComponent";
 
 interface ReservationsState {
-    reservations: Reservation[]
+    reservations: Map<string, Reservation>
 }
 interface ReservationsProps {
     user: User | undefined,
@@ -17,7 +17,7 @@ export class Reservations extends React.Component<ReservationsProps, Reservation
     constructor(props: ReservationsProps){
         super(props);
         this.state = {
-            reservations: []
+            reservations: new Map<string, Reservation>()
         }
         this.cancelReservation = this.cancelReservation.bind(this);
         this.approveReservation = this.approveReservation.bind(this);
@@ -27,7 +27,7 @@ export class Reservations extends React.Component<ReservationsProps, Reservation
     async componentDidMount() {
         const reservations = await this.props.dataService.getReservations();
         this.setState({
-            reservations: reservations
+            reservations: new Map(reservations.map(i=>[i.spaceId, i]))
         });
     }
 
@@ -38,8 +38,11 @@ export class Reservations extends React.Component<ReservationsProps, Reservation
         console.log(`Canceling reservation ${reservationId}`)
     }
     private async deleteReservation(reservationId: string){
-        const reservationsCopy = [...this.state.reservations]
-       // const deleteIndex = reservationsCopy.indexOf(reservationId);
+        const reservationsCopy = new Map(this.state.reservations);
+        reservationsCopy.delete(reservationId);
+        this.setState({
+            reservations: reservationsCopy
+        })
         console.log(`Deleting reservation ${reservationId}`)
     }
 
@@ -48,7 +51,8 @@ export class Reservations extends React.Component<ReservationsProps, Reservation
 
     private renderReservations(){
         const rows: any[] = []
-        for(const reservation of this.state.reservations){
+
+        this.state.reservations.forEach((reservation) =>{
             rows.push(
                 <ReservationComponent
                     key = {reservation.reservationId}
@@ -61,7 +65,7 @@ export class Reservations extends React.Component<ReservationsProps, Reservation
                     deleteReservation = {this.deleteReservation}
                 />
             )
-        }
+        })
         return <table>
             <tbody>
             {rows}
