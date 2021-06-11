@@ -20,7 +20,7 @@ export class ReservationComponent extends React.Component<ReservationsProps> {
         }
     }
     private renderApproveButton() {
-        if (this.props.cancelReservation) {
+        if (this.props.approveReservation) {
             return <td>
                 <button onClick={() => this.props.approveReservation!(this.props.reservationId)}>
                     cancel
@@ -29,7 +29,7 @@ export class ReservationComponent extends React.Component<ReservationsProps> {
         }
     }
     private renderDeleteButton() {
-        if (this.props.cancelReservation) {
+        if (this.props.deleteReservation) {
             return <td>
                 <button onClick={() => this.props.deleteReservation!(this.props.reservationId)}>
                     cancel

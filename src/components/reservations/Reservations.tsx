@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Reservation, User } from "../../model/Model";
 import { DataService } from "../../services/DataService";
+import { ReservationComponent } from "./ReservationComponent";
 
 interface ReservationsState {
     reservations: Reservation[]
@@ -44,7 +45,24 @@ export class Reservations extends React.Component<ReservationsProps, Reservation
 
 
     private renderReservations(){
-
+        const rows: any[] = []
+        for(const reservation of this.state.reservations){
+            rows.push(
+                <ReservationComponent
+                    key = {reservation.reservationId}
+                    reservationId = {reservation.reservationId}
+                    spaceId = {reservation.spaceId}
+                    state = {reservation.state}
+                    user = {reservation.user}
+                    approveReservation={this.approveReservation}
+                />
+            )
+        }
+        return <table>
+            <tbody>
+            {rows}
+            </tbody>
+        </table>
     }
 
     render(){
