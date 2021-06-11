@@ -38,6 +38,8 @@ export class Reservations extends React.Component<ReservationsProps, Reservation
         console.log(`Canceling reservation ${reservationId}`)
     }
     private async deleteReservation(reservationId: string){
+        const reservationsCopy = [...this.state.reservations]
+       // const deleteIndex = reservationsCopy.indexOf(reservationId);
         console.log(`Deleting reservation ${reservationId}`)
     }
 
@@ -54,7 +56,9 @@ export class Reservations extends React.Component<ReservationsProps, Reservation
                     spaceId = {reservation.spaceId}
                     state = {reservation.state}
                     user = {reservation.user}
-                    approveReservation={this.approveReservation}
+                    approveReservation ={this.approveReservation}
+                    cancelReservation = {this.cancelReservation}
+                    deleteReservation = {this.deleteReservation}
                 />
             )
         }

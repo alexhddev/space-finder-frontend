@@ -21,18 +21,21 @@ export class ReservationComponent extends React.Component<ReservationsProps> {
     }
     private renderApproveButton() {
         if (this.props.approveReservation) {
-            return <td>
+            return <tr>
                 <button onClick={() => this.props.approveReservation!(this.props.reservationId)}>
-                    cancel
-                    </button>
-            </td>
+                    approve
+                </button>
+            </tr>
+
+
+
         }
     }
     private renderDeleteButton() {
         if (this.props.deleteReservation) {
             return <td>
                 <button onClick={() => this.props.deleteReservation!(this.props.reservationId)}>
-                    cancel
+                    delete
                     </button>
             </td>
         }
@@ -44,9 +47,9 @@ export class ReservationComponent extends React.Component<ReservationsProps> {
                 <td>{this.props.user}</td>
                 <td>{this.props.spaceId}</td>
                 <td>{this.props.state}</td>
-                {this.renderApproveButton}
-                {this.renderCancelButton}
-                {this.renderDeleteButton}
+                {this.renderApproveButton()}
+                {this.renderCancelButton()}
+                {this.renderDeleteButton()}
             </tr>
         )
     }
