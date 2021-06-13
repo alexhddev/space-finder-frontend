@@ -12,9 +12,22 @@ config.update({
 export class DataService {
 
     private user: User | undefined;
-    private s3Client = new S3({
-        region: appConfig.REGION
-    });
+    private s3Client : S3 | undefined
+
+    /**
+     * Due to a bug, the s3 client doesn't load the credentials after they are created
+     * Here we are initializing it lazily
+     */
+    private getS3Client():S3 {
+        if (this.s3Client) {
+            return this.s3Client
+        } else {
+            this.s3Client = new S3({
+                region: appConfig.REGION
+            }) 
+            return this.s3Client;
+        }
+    }
 
     public setUser(user: User){
         this.user = user;
@@ -42,7 +55,7 @@ export class DataService {
 
     private async uploadPublicFile(file: File, bucket: string){
         const fileName = generateRandomId() +  file.name;
-        const uploadResult = await new S3({region: appConfig.REGION}).upload({
+        const uploadResult = await this.getS3Client().upload({
             Bucket: bucket,
             Key: fileName,
             Body: file,
