@@ -21,11 +21,11 @@ export class ReservationComponent extends React.Component<ReservationsProps> {
     }
     private renderApproveButton() {
         if (this.props.approveReservation) {
-            return <tr>
+            return <td>
                 <button onClick={() => this.props.approveReservation!(this.props.reservationId)}>
                     approve
                 </button>
-            </tr>
+            </td>
 
 
 
