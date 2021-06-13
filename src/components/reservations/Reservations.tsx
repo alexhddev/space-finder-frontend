@@ -27,7 +27,7 @@ export class Reservations extends React.Component<ReservationsProps, Reservation
     async componentDidMount() {
         const reservations = await this.props.dataService.getReservations();
         this.setState({
-            reservations: new Map(reservations.map(i=>[i.spaceId, i]))
+            reservations: new Map(reservations.map(i=>[i.reservationId, i]))
         });
     }
 
