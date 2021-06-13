@@ -3,7 +3,8 @@ import { CognitoUser } from '@aws-amplify/auth'
 
 export interface User {
     userName: string,
-    cognitoUser: CognitoUser
+    cognitoUser: CognitoUser,
+    isAdmin: boolean
 }
 
 export interface UserAttribute {

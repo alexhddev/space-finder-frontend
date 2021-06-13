@@ -32,6 +32,10 @@ export class App extends React.Component<{}, AppState>{
   }
 
   private async setUser(user: User){
+    const isAdmin = this.authService.isUserAdmin(user);
+    if (isAdmin) {
+      user.isAdmin = true;
+    }
     this.setState({
       user: user
     })

@@ -25,7 +25,8 @@ export class AuthService {
             const user = await Auth.signIn(userName, password) as CognitoUser;
             return {
                 cognitoUser: user,
-                userName: user.getUsername()
+                userName: user.getUsername(),
+                isAdmin: false
             };
         } catch (error) {
             return undefined
@@ -64,5 +65,20 @@ export class AuthService {
         const attributes = await Auth.userAttributes(user.cognitoUser);
         result.push(...attributes);
         return result
+    }
+
+    public isUserAdmin(user: User): boolean{
+        const session = user.cognitoUser.getSignInUserSession();
+        if (session) {
+            const idTokenPayload = session.getIdToken().decodePayload();
+            const cognitoGroups = idTokenPayload['cognito:groups'];
+            if (cognitoGroups) {
+                return (cognitoGroups as string).includes('admins')
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 }
