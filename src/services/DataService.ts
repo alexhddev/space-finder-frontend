@@ -127,4 +127,18 @@ export class DataService {
         const responseJSON = await requestResult.json();
         return responseJSON.id;
     }
+
+    public async deleteReservation(reservationId: string):Promise<any> {
+        const requestUrl = `${appConfig.api.reservationsUrl}?reservationId=${reservationId}`;
+        const requestResult = await fetch(
+            requestUrl, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': this.getUserIdToken()
+                }
+            }
+        );
+        const responseJSON = await requestResult.json();
+        return responseJSON;
+    }
 }
