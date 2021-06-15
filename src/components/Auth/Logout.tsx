@@ -18,7 +18,6 @@ export class Logout extends React.Component<LogoutProps, LogoutState> {
         logoutSuccess: ''
     }
 
-
     async componentDidMount(){
         if (this.props.user) {
             const result = await this.props.authService.logOut();
@@ -33,7 +32,6 @@ export class Logout extends React.Component<LogoutProps, LogoutState> {
             })
         }        
     }
-
 
     render(){
             return (

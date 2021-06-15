@@ -34,7 +34,6 @@ export class AuthService {
     }
 
     public async logOut(){
-        console.log('Logging out!!!')
         return await Auth.signOut();
     }
 
