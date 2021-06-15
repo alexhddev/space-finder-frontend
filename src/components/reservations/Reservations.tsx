@@ -46,7 +46,7 @@ export class Reservations extends React.Component<ReservationsProps, Reservation
         const reservationsCopy = new Map(this.state.reservations);
         const toApproveReservation = reservationsCopy.get(reservationId);
         if (toApproveReservation) {
-            toApproveReservation.state = "APPROVED"
+            toApproveReservation.state = "CANCELED"
             this.setState({
                 reservations: reservationsCopy
             });
