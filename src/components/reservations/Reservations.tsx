@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Reservation, User } from "../../model/Model";
 import { DataService } from "../../services/DataService";
 import { ReservationComponent } from "./ReservationComponent";
+import './Reservations.css';
 
 interface ReservationsState {
     reservations: Map<string, Reservation>
@@ -25,7 +26,7 @@ export class Reservations extends React.Component<ReservationsProps, Reservation
     }
 
     async componentDidMount() {
-        const reservations = await this.props.dataService.getReservations();
+        const reservations = await this.props.dataService.getAllReservations();
         this.setState({
             reservations: new Map(reservations.map(i=>[i.reservationId, i]))
         });
@@ -42,6 +43,7 @@ export class Reservations extends React.Component<ReservationsProps, Reservation
             await this.props.dataService.updateReservation(reservationId, "APPROVED");
         }
     }
+    
     private async cancelReservation(reservationId: string){
         const reservationsCopy = new Map(this.state.reservations);
         const toApproveReservation = reservationsCopy.get(reservationId);
@@ -53,6 +55,7 @@ export class Reservations extends React.Component<ReservationsProps, Reservation
             await this.props.dataService.updateReservation(reservationId, "CANCELED");
         }
     }
+
     private async deleteReservation(reservationId: string){
         const reservationsCopy = new Map(this.state.reservations);
         reservationsCopy.delete(reservationId);
@@ -61,9 +64,6 @@ export class Reservations extends React.Component<ReservationsProps, Reservation
         })
         await this.props.dataService.deleteReservation(reservationId);
     }
-
-    
-
 
     private renderReservations(){
         const rows: any[] = []
@@ -84,6 +84,12 @@ export class Reservations extends React.Component<ReservationsProps, Reservation
         })
         return <table>
             <tbody>
+                <tr>
+                    <th>User</th>
+                    <th>SpaceId</th>
+                    <th>State</th>
+                    <th colSpan={3} >Actions</th>
+                </tr>
             {rows}
             </tbody>
         </table>

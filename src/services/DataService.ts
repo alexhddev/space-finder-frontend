@@ -110,9 +110,8 @@ export class DataService {
     }
 
     
-    public async getReservations(): Promise<Reservation[]> {
-        if (this.user) {
-            console.log(`Using token: ${this.getUserIdToken()}`)
+    public async getAllReservations(): Promise<Reservation[]> {
+        if (this.user?.isAdmin) {
             const requestUrl = appConfig.api.reservationsUrl;
             const requestResult = await fetch(
                 requestUrl, {
@@ -126,6 +125,24 @@ export class DataService {
             return responseJSON;
         } else {
             return []
+        }
+    }
+
+    public async getUserReservations(): Promise<Reservation[]> {
+        if (this.user) {
+            const requestUrl = `${appConfig.api.reservationsUrl}?user=${this.user.userName}`;
+            const requestResult = await fetch(
+                requestUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': this.getUserIdToken()
+                    }
+                }
+            );
+            const responseJSON = await requestResult.json();
+            return responseJSON;
+        } else {
+            return [];
         }
     }
 
