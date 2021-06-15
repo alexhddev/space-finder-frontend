@@ -32,18 +32,26 @@ export class Reservations extends React.Component<ReservationsProps, Reservation
     }
 
     private async approveReservation(reservationId: string){
-        console.log(`Approving reservation ${reservationId}`)
         const reservationsCopy = new Map(this.state.reservations);
         const toApproveReservation = reservationsCopy.get(reservationId);
         if (toApproveReservation) {
             toApproveReservation.state = "APPROVED"
             this.setState({
                 reservations: reservationsCopy
-            })
+            });
+            await this.props.dataService.updateReservation(reservationId, "APPROVED");
         }
     }
     private async cancelReservation(reservationId: string){
-        console.log(`Canceling reservation ${reservationId}`)
+        const reservationsCopy = new Map(this.state.reservations);
+        const toApproveReservation = reservationsCopy.get(reservationId);
+        if (toApproveReservation) {
+            toApproveReservation.state = "APPROVED"
+            this.setState({
+                reservations: reservationsCopy
+            });
+            await this.props.dataService.updateReservation(reservationId, "CANCELED");
+        }
     }
     private async deleteReservation(reservationId: string){
         const reservationsCopy = new Map(this.state.reservations);
