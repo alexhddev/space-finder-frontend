@@ -1,7 +1,7 @@
 import React, { SyntheticEvent } from "react";
-import { User } from "../model/Model";
-import { AuthService } from "../services/AuthService";
-import history from '../utils/history'
+import { User } from "../../model/Model";
+import { AuthService } from "../../services/AuthService";
+import history from '../../utils/history'
 
 
 
@@ -12,8 +12,7 @@ interface LoginProps {
 interface LoginState {
     userName: string,
     password: string,
-    loginAttenpted: boolean,
-    loginSuccesfull: boolean
+    loginStatusMessage: string
 }
 
 interface CustomEvent {
@@ -25,8 +24,7 @@ export class Login extends React.Component<LoginProps, LoginState> {
     state: LoginState = {
         userName: '',
         password: '',
-        loginAttenpted: false,
-        loginSuccesfull: false
+        loginStatusMessage: ''
     }
 
     private setUserName(event: CustomEvent){
@@ -39,40 +37,38 @@ export class Login extends React.Component<LoginProps, LoginState> {
     
     private async handleSubmit(event: SyntheticEvent){
         event.preventDefault();
-        this.setState({loginAttenpted: true})
         const result = await this.props.authService.login(
             this.state.userName,
             this.state.password
         )
         if (result) {
-            this.setState({loginSuccesfull: true})
             this.props.setUser(result)
             history.push('/profile')
         } else {
-            this.setState({loginSuccesfull: false})
+            this.setState({loginStatusMessage: 'Login failed. Please check your credentials'})
         }
     }
 
-
-    render(){
-        let loginMessage: any;
-        if (this.state.loginAttenpted) {
-            if (this.state.loginSuccesfull) {
-                loginMessage = <label>Login successful</label>
-            } else {
-                loginMessage = <label>Login failed</label>
-            }
-        }
-
-        return (
-            <div>
+    private renderLoginForm(){
+        return <div>
                 <h2>Please login</h2>
                 <form onSubmit={e => this.handleSubmit(e)}>
                     <input value={this.state.userName} onChange = {e => this.setUserName(e)}/><br/>
                     <input value={this.state.password} onChange = {e => this.setPassword(e)} type='password'/><br/>
-                    <input type='submit'value='Login'/>
+                    <input type='submit' value='Login'/>
                 </form>
-                {loginMessage}
+                {this.state.loginStatusMessage}<br></br>
+        </div>
+    }
+
+
+
+
+    render(){
+
+        return (
+            <div>
+                {this.renderLoginForm()}
             </div>
         )
     }

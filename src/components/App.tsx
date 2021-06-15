@@ -1,7 +1,8 @@
 import React from 'react';
 import { User  } from '../model/Model'
 import { AuthService } from '../services/AuthService'
-import { Login } from './Login';
+import { Login } from './Auth/Login';
+import { Logout } from './Auth/Logout';
 import { Router, Route, Switch } from 'react-router-dom'
 import history from '../utils/history';
 import { Navbar } from './Navbar';
@@ -28,7 +29,14 @@ export class App extends React.Component<{}, AppState>{
       user: undefined
     }
 
-    this.setUser = this.setUser.bind(this)
+    this.setUser = this.setUser.bind(this);
+    this.clearUser = this.clearUser.bind(this);
+  }
+
+  private clearUser(){
+    this.setState({
+      user: undefined
+    });
   }
 
   private async setUser(user: User){
@@ -66,6 +74,9 @@ export class App extends React.Component<{}, AppState>{
               </Route>
               <Route exact path='/reservations'>
                 <Reservations dataService={this.dataService} user={this.state.user}/>
+              </Route>
+              <Route exact path='/logout'>
+                <Logout user={this.state.user} authService={this.authService} clearUser={this.clearUser}/>
               </Route>
             </Switch>
           </div>

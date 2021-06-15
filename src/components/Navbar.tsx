@@ -11,7 +11,7 @@ export class Navbar extends React.Component<{
     render() {
         let loginLogOut: any
         if (this.props.user) {
-            loginLogOut = <Link to='/logout' style={{ float: 'right' }} >{this.props.user.userName}</Link>
+            loginLogOut = <Link to='/logout' style={{ float: 'right' }} >{this.props.user.userName} Logout</Link>
         } else {
             loginLogOut = <Link data-testid='login-link'  to='/login' style={{ float: 'right' }}>Login</Link>
         }

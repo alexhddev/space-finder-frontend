@@ -31,7 +31,11 @@ export class AuthService {
         } catch (error) {
             return undefined
         }
+    }
 
+    public async logOut(){
+        console.log('Logging out!!!')
+        return await Auth.signOut();
     }
 
     public async getAWSTemporaryCreds(user: CognitoUser){
