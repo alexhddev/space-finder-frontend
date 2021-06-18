@@ -70,6 +70,18 @@ export class AuthService {
         return result
     }
 
+    public async updateProfilePicture(user: User, pictureUrl: string){
+        await this.updateUserAttribute(user, {
+            picture: pictureUrl
+        })
+    }
+
+    private async updateUserAttribute(user: User, attribute: {
+        [key: string]: string
+    }) {
+        await Auth.updateUserAttributes(user.cognitoUser, attribute)
+    }
+
     public isUserAdmin(user: User): boolean{
         const session = user.cognitoUser.getSignInUserSession();
         if (session) {

@@ -8,6 +8,7 @@ export const config = {
     APP_CLIENT_ID: '335vma5jmludo42mn2895cu5bh',
     IDENTITY_POOL_ID: 'eu-west-1:c1490135-4dd2-4a82-9959-880f77fef599',
     SPACES_PHOTOS_BUCKET: 'spaces-photos-02380a0ccf21',
+    PROFILE_PHOTOS_BUCKET: 'profile-photos-02380a0ccf21',
     api: {
         baseUrl: spacesUrl,
         spacesUrl: `${spacesUrl}spaces/`,

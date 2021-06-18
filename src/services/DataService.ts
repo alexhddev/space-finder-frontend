@@ -53,6 +53,10 @@ export class DataService {
         return JSON.stringify(resultJSON.id);
     }
 
+    public async uploadProfilePicture(file: File){
+        return await this.uploadPublicFile(file, appConfig.PROFILE_PHOTOS_BUCKET)
+    }
+
     private async uploadPublicFile(file: File, bucket: string){
         const fileName = generateRandomId() +  file.name;
         const uploadResult = await this.getS3Client().upload({
