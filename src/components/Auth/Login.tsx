@@ -1,7 +1,9 @@
 import React, { SyntheticEvent } from "react";
+import { Link } from "react-router-dom";
 import { User } from "../../model/Model";
 import { AuthService } from "../../services/AuthService";
 import history from '../../utils/history'
+import './Forms.css'
 
 
 
@@ -53,11 +55,13 @@ export class Login extends React.Component<LoginProps, LoginState> {
         return <div>
                 <h2>Please login</h2>
                 <form onSubmit={e => this.handleSubmit(e)}>
-                    <input value={this.state.userName} onChange = {e => this.setUserName(e)}/><br/>
-                    <input value={this.state.password} onChange = {e => this.setPassword(e)} type='password'/><br/>
+                    <label>User name</label>
+                    <input value={this.state.userName} onChange = {e => this.setUserName(e)}/>
+                    <label>Password</label>
+                    <input value={this.state.password} onChange = {e => this.setPassword(e)} type='password'/>
                     <input type='submit' value='Login'/>
                 </form>
-                {this.state.loginStatusMessage}<br></br>
+               <label className='error'>{this.state.loginStatusMessage}</label> <br></br><br></br>
         </div>
     }
 
@@ -69,6 +73,8 @@ export class Login extends React.Component<LoginProps, LoginState> {
         return (
             <div>
                 {this.renderLoginForm()}
+                <br></br>
+                Don't have an account? <Link to='signup'>Sign up</Link>
             </div>
         )
     }

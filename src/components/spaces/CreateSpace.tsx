@@ -61,18 +61,14 @@ export class CreateSpace extends Component<ICreateSpaceProps, ICreateSpaceState>
                 photoSpace = <div></div>
             }
             return <form onSubmit={e => this.handleSubmit(e)}>
-                <label>Name:<br />
-                    <input name='space name' value={this.state.name} onChange={e => this.setName(e)} />
-                </label><br />
-                <label>Location:<br />
-                    <input name='space location' value={this.state.location} onChange={e => this.setLocation(e)} />
-                </label><br />
-                <label>Description:<br />
-                    <input name='space location' value={this.state.description} onChange={e => this.setDescription(e)} />
-                </label><br />
-                <label>Photo:<br />
-                    <input name='photo' type='file' onChange={e => this.setPhotoUrl(e)} />
-                </label><br />
+                <label>Name:</label>
+                <input name='space name' value={this.state.name} onChange={e => this.setName(e)} />                
+                <label>Location: </label>
+                <input name='space location' value={this.state.location} onChange={e => this.setLocation(e)} />                
+                <label>Description:</label>
+                <input name='space location' value={this.state.description} onChange={e => this.setDescription(e)} />                
+                <label>Photo:</label>
+                <input name='photo' type='file' onChange={e => this.setPhotoUrl(e)} />                
                 {photoSpace}<br />
                 <input data-test="submit-button" type="submit" value="Create space" />
             </form>

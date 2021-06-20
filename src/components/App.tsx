@@ -12,6 +12,7 @@ import { Spaces } from './spaces/Spaces'
 import { DataService } from '../services/DataService';
 import { CreateSpace } from './spaces/CreateSpace';
 import { Reservations } from './reservations/Reservations';
+import { SignUp } from './Auth/Signup';
 
 interface AppState{
   user: User | undefined
@@ -77,6 +78,9 @@ export class App extends React.Component<{}, AppState>{
               </Route>
               <Route exact path='/logout'>
                 <Logout user={this.state.user} authService={this.authService} clearUser={this.clearUser}/>
+              </Route>
+              <Route exact path='/signup'>
+                <SignUp authService={this.authService}/>
               </Route>
             </Switch>
           </div>
